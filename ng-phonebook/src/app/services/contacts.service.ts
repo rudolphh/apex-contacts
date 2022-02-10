@@ -1,9 +1,9 @@
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 
 import {Contact} from '../components/contact-list/contact';
 import {Injectable} from '@angular/core';
-import {catchError} from 'rxjs/operators';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -17,7 +17,7 @@ export class ContactService {
     constructor(private http: HttpClient) {
     }
 
-    serverUrl = 'http://localhost:8080/api/contact';
+    serverUrl = 'http://localhost:3000/api/v1/contacts';
 
     private static handleError(error: HttpErrorResponse): Observable<never> {
         if (error.error instanceof ErrorEvent) {
@@ -33,7 +33,10 @@ export class ContactService {
 
     postContact(contact: Contact): Observable<Contact> {
         return this.http.post<Contact>(this.serverUrl, contact, httpOptions)
-            .pipe(catchError(ContactService.handleError));
+            .pipe(
+              map((response: any) => response.data),
+              catchError(ContactService.handleError)
+            );
     }
 
     putContact(contact: Contact): Observable<Contact> {
@@ -43,12 +46,27 @@ export class ContactService {
 
     loadAll(): Observable<Contact[]> {
         return this.http.get<Contact[]>(this.serverUrl, httpOptions)
-            .pipe(catchError(ContactService.handleError));
+            .pipe(
+              map((response: any) => response.data),
+              catchError(ContactService.handleError)
+            );
     }
 
     getById(id): Observable<Contact> {
         return this.http.get<Contact>(this.serverUrl + '/' + id, httpOptions)
             .pipe(catchError(ContactService.handleError));
+    }
+
+    deleteContactById(id: number): Observable<any> {
+      return this.http.delete(this.serverUrl + '/' + id, httpOptions);
+    }
+
+    findContacts(keyword: string): Observable<Contact[]> {
+      return this.http.get<Contact[]>(this.serverUrl + '?keyword=' + keyword, httpOptions)
+        .pipe(
+          map((response: any) => response.data),
+          catchError(ContactService.handleError)
+        );
     }
 
 }

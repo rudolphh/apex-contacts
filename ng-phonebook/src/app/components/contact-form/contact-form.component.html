@@ -1,6 +1,6 @@
 <div class="container">
   <div [hidden]="submitted"></div>
-  <h1>Add Contact</h1>
+  <h1 data-test="add-contact">Add Contact</h1>
   <form (ngSubmit)="contactForm.valid && onSubmit(contactForm)" #contactForm="ngForm">
     <div class="form-group">
       <label for="firstName">First Name</label>
@@ -9,7 +9,7 @@
              [(ngModel)]="model.firstName" name="firstName"
              [disabled]="submitted"
              #firstName="ngModel">
-      <div [hidden]="firstName.valid || firstName.pristine"
+      <div [hidden]="submitted || firstName.valid || firstName.pristine"
            class="alert alert-danger">
         First Name is required
       </div>
@@ -22,7 +22,7 @@
              [(ngModel)]="model.lastName" name="lastName"
              [disabled]="submitted"
              #lastName="ngModel">
-      <div [hidden]="lastName.valid || lastName.pristine"
+      <div [hidden]="submitted || lastName.valid || lastName.pristine"
            class="alert alert-danger">LastName is required
       </div>
     </div>
@@ -34,7 +34,7 @@
              [(ngModel)]="model.email" name="email"
              [disabled]="submitted"
              #email="ngModel">
-      <div [hidden]="email.valid || email.pristine"
+      <div [hidden]="submitted || email.valid || email.pristine"
            class="alert alert-danger">Email is required
       </div>
     </div>

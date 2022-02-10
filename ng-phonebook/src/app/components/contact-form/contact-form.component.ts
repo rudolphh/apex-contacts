@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 import {Contact} from '../contact-list/contact';
 import {ContactService} from '../../services/contacts.service';
@@ -13,6 +13,8 @@ export class ContactFormComponent implements OnInit {
     model = {} as Contact;
     submitted = false;
     btnName = 'Submit';
+
+    @Output() savedContact = new EventEmitter<Contact>();
 
     constructor(private contactService: ContactService) {
     }
@@ -30,9 +32,11 @@ export class ContactFormComponent implements OnInit {
         this.contactService.postContact(this.model)
             .subscribe(contact => {
                 console.log('object saved', contact);
+                this.savedContact.emit(contact);
+
+                contactForm.reset();
                 this.model = this.createNew();
                 this.submitted = false;
-                contactForm.resetForm();
             });
 
         console.log('submitted');

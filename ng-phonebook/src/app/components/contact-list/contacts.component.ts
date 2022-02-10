@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 
 import {Contact} from './contact';
+import { ContactDataService } from '../../services/contact-data.service';
 import {ContactService} from '../../services/contacts.service';
-import { Subscription } from 'rxjs';
-import {updatePlaceholderMap} from '@angular/compiler/src/render3/view/i18n/util';
 
 @Component({
   selector: 'app-contacts',
@@ -14,7 +14,10 @@ import {updatePlaceholderMap} from '@angular/compiler/src/render3/view/i18n/util
 export class ContactsComponent implements OnInit {
   public contacts = [];
 
-  constructor(private contactService: ContactService) {
+  constructor(private contactDataService: ContactDataService, private contactService: ContactService) {
+    this.contactDataService.contacts$.subscribe(contacts => {
+      this.contacts = contacts;
+    });
   }
 
   ngOnInit(): void {
@@ -23,7 +26,24 @@ export class ContactsComponent implements OnInit {
 
   private readAll(): Subscription {
     return this.contactService.loadAll().subscribe((list) => {
-      this.contacts = list;
+      this.setContacts(list);
+    });
+  }
+
+  addContact(contact: Contact): void {
+    this.contacts.push(contact);
+    this.setContacts(this.contacts);
+  }
+
+  setContacts(contacts: Contact[]): void {
+    this.contactDataService.setContacts(contacts);
+  }
+
+  deleteContact(contact: Contact): void {
+    this.contactDataService.deleteContact(contact).subscribe(response => {
+      if(response.success) {
+        this.setContacts(this.contacts.filter(item => item.id !== contact.id));
+      }
     });
   }
 }
