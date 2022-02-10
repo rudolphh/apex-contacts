@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ContactService} from "../../services/contacts.service";
-import {NgForm} from "@angular/forms";
-import {Contact} from "../contact-list/contact";
+
+import {Contact} from '../contact-list/contact';
+import {ContactService} from '../../services/contacts.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-contact-form',
@@ -9,7 +10,7 @@ import {Contact} from "../contact-list/contact";
     styleUrls: ['./contact-form.component.css']
 })
 export class ContactFormComponent implements OnInit {
-    model = <Contact> {};
+    model = {} as Contact;
     submitted = false;
     btnName = 'Submit';
 
@@ -19,11 +20,11 @@ export class ContactFormComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    createNew() {
-        return  {} as Contact;
+    createNew(): Contact {
+        return {} as Contact;
     }
 
-    onSubmit(contactForm: NgForm) {
+    onSubmit(contactForm: NgForm): void {
         this.submitted = true;
 
         this.contactService.postContact(this.model)
@@ -37,7 +38,7 @@ export class ContactFormComponent implements OnInit {
         console.log('submitted');
     }
 
-    get diagnostic() {
+    get diagnostic(): string {
         return JSON.stringify(this.model);
     }
 

@@ -1,7 +1,7 @@
 <div class="container">
   <div [hidden]="submitted"></div>
   <h1>Add Contact</h1>
-  <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
+  <form (ngSubmit)="contactForm.valid && onSubmit(contactForm)" #contactForm="ngForm">
     <div class="form-group">
       <label for="firstName">First Name</label>
       <input type="text" class="form-control" id="firstName"
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-success" >{{btnName}}</button>
+    <button type="submit" class="btn btn-success" [disabled]="!contactForm.valid" >{{btnName}}</button>
   </form>
 
 </div>

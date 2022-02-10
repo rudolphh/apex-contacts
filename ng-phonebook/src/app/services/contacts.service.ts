@@ -1,8 +1,9 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {throwError} from "rxjs";
-import {catchError} from "rxjs/operators";
-import {Injectable} from "@angular/core";
-import {Contact} from "../components/contact-list/contact";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+
+import {Contact} from '../components/contact-list/contact';
+import {Injectable} from '@angular/core';
+import {catchError} from 'rxjs/operators';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -18,7 +19,7 @@ export class ContactService {
 
     serverUrl = 'http://localhost:8080/api/contact';
 
-    private static handleError(error: HttpErrorResponse) {
+    private static handleError(error: HttpErrorResponse): Observable<never> {
         if (error.error instanceof ErrorEvent) {
             console.error('An error occurred:', error.error.message);
         } else {
@@ -30,22 +31,22 @@ export class ContactService {
             'Something bad happened; please try again later.');
     }
 
-    postContact(contact: Contact) {
+    postContact(contact: Contact): Observable<Contact> {
         return this.http.post<Contact>(this.serverUrl, contact, httpOptions)
             .pipe(catchError(ContactService.handleError));
     }
 
-    putContact(contact: Contact) {
+    putContact(contact: Contact): Observable<Contact> {
         return this.http.put<Contact>(this.serverUrl + '/' + contact.id, contact, httpOptions)
             .pipe(catchError(ContactService.handleError));
     }
 
-    loadAll() {
+    loadAll(): Observable<Contact[]> {
         return this.http.get<Contact[]>(this.serverUrl, httpOptions)
             .pipe(catchError(ContactService.handleError));
     }
 
-    getById(id) {
+    getById(id): Observable<Contact> {
         return this.http.get<Contact>(this.serverUrl + '/' + id, httpOptions)
             .pipe(catchError(ContactService.handleError));
     }

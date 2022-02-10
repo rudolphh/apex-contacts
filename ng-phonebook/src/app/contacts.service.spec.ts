@@ -1,13 +1,18 @@
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
+import { ContactService } from './services/contacts.service';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { ContactsService } from './services/contacts.service';
-
-describe('ContactsService', () => {
-  let service: ContactsService;
+describe('ContactService', () => {
+  let service: ContactService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(ContactsService);
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, HttpClientTestingModule ],
+      providers: [ContactService]
+    });
+    service = TestBed.inject(ContactService);
   });
 
   it('should be created', () => {

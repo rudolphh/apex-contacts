@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ContactService} from "../../services/contacts.service";
-import {Contact} from "./contact";
-import {updatePlaceholderMap} from "@angular/compiler/src/render3/view/i18n/util";
+
+import {Contact} from './contact';
+import {ContactService} from '../../services/contacts.service';
+import { Subscription } from 'rxjs';
+import {updatePlaceholderMap} from '@angular/compiler/src/render3/view/i18n/util';
 
 @Component({
   selector: 'app-contacts',
@@ -19,7 +21,7 @@ export class ContactsComponent implements OnInit {
     this.readAll();
   }
 
-  private readAll() {
+  private readAll(): Subscription {
     return this.contactService.loadAll().subscribe((list) => {
       this.contacts = list;
     });
