@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 describe('ContactFormComponent', () => {
   let component: ContactFormComponent;
   let fixture: ComponentFixture<ContactFormComponent>;
-  let contactServiceSpy = jasmine.createSpyObj<ContactService>(
+  const contactServiceSpy = jasmine.createSpyObj<ContactService>(
     'ContactService',
     {
       postContact: of({
@@ -41,10 +41,10 @@ describe('ContactFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it("should have header h1 with the text 'Add Contact'", () => {
+  it('should have header h1 with the text \'Add Contact\'', () => {
     const compiled: HTMLElement = fixture.nativeElement;
     const addContactHeader = compiled.querySelector('[data-test="add-contact"');
     expect(addContactHeader.nodeName.toLowerCase()).toBe('h1');
-    expect(addContactHeader.textContent).toBe("Add Contact");
+    expect(addContactHeader.textContent).toBe('Add Contact');
   });
 });

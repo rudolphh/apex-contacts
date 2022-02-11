@@ -2,7 +2,7 @@
   (savedContact)="addContact($event)"
 ></app-contact-form>
 
-<div class="container mt-5">
+<div class="container mt-3">
   <app-contact-search
     (resultContacts)="setContacts($event)"
   ></app-contact-search>
@@ -18,7 +18,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let contact of contacts; index as i">
+    <tr *ngFor="let contact of contacts; index as i" (click)="clickRow(contact, i)" style="cursor: pointer;">
       <th scope="row">{{ contact.id }}</th>
       <td>{{ contact.firstName }}</td>
       <td>{{ contact.lastName }}</td>
@@ -28,4 +28,8 @@
     </tbody>
   </table>
 </div>
+
+<app-contact-edit
+  (updatedContact)="updateContacts($event)"
+></app-contact-edit>
 

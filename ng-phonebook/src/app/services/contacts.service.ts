@@ -58,7 +58,8 @@ export class ContactService {
     }
 
     deleteContactById(id: number): Observable<any> {
-      return this.http.delete(this.serverUrl + '/' + id, httpOptions);
+      return this.http.delete(this.serverUrl + '/' + id, httpOptions)
+          .pipe(catchError(ContactService.handleError));
     }
 
     findContacts(keyword: string): Observable<Contact[]> {

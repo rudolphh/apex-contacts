@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import {Contact} from './contact';
 import { ContactDataService } from '../../services/contact-data.service';
+import { ContactEditComponent } from '../contact-edit/contact-edit.component';
 import {ContactService} from '../../services/contacts.service';
 
 @Component({
@@ -45,5 +46,19 @@ export class ContactsComponent implements OnInit {
         this.setContacts(this.contacts.filter(item => item.id !== contact.id));
       }
     });
+  }
+
+  updateContacts(updatedContact: Contact): void {
+    const newContacts = this.contacts.map((contact: Contact) => {
+      if (contact.id === updatedContact.id) {
+        contact = updatedContact;
+      }
+      return contact;
+    });
+    this.contactDataService.setContacts(newContacts);
+  }
+
+  clickRow(contact: Contact, row: number): void {
+    this.contactDataService.setEditContact(contact);
   }
 }

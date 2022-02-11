@@ -11,13 +11,15 @@ import { ContactsComponent } from './components/contact-list/contacts.component'
 import {HttpMockRequestInterceptor} from "./services/http-mock-request-interceptor.service";
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactsComponent,
     ContactFormComponent,
-    ContactSearchComponent
+    ContactSearchComponent,
+    ContactEditComponent
   ],
   imports: [
     BrowserModule,

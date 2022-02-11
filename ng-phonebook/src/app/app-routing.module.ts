@@ -1,5 +1,7 @@
+import { RouterModule, Routes } from '@angular/router';
+
+import { ContactSearchComponent } from './components/contact-search/contact-search.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [];
 
