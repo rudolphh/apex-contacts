@@ -40,7 +40,9 @@ export class ContactEditComponent implements OnInit {
     this.contactDataService.editContact$.subscribe(editContact => {
       this.contact = editContact;
       this.editContactForm.reset();
-      this.editContactForm.patchValue(editContact);
+      if (editContact){
+        this.editContactForm.patchValue(editContact);
+      }
     });
   }
 

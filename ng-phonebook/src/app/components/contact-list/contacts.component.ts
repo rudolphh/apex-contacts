@@ -38,6 +38,7 @@ export class ContactsComponent implements OnInit {
 
   setContacts(contacts: Contact[]): void {
     this.contactDataService.setContacts(contacts);
+    this.contactDataService.setEditContact(null);
   }
 
   deleteContact(contact: Contact): void {

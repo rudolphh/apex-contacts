@@ -24,16 +24,12 @@ export class ContactSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchForm.get('searchInput').valueChanges.pipe(
-      debounceTime(300),
+      debounceTime(500),
       distinctUntilChanged(),
       switchMap((keyword: string) => this.contactService.findContacts(keyword))
     ).subscribe(contacts => {
       this.resultContacts.emit(contacts);
     });
-  }
-
-  onSubmit(): void {
-
   }
 
 }
