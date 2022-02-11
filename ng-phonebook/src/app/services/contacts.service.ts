@@ -1,6 +1,6 @@
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, map, shareReplay} from 'rxjs/operators';
 
 import {Contact} from '../components/contact-list/contact';
 import {Injectable} from '@angular/core';

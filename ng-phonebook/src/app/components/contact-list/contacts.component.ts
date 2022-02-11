@@ -21,7 +21,7 @@ export class ContactsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.readAll();
+   // this.readAll();
   }
 
   private readAll(): Subscription {
