@@ -18,8 +18,17 @@ describe('ContactSearchComponent', () => {
         firstName: 'Rudy',
         lastName: 'Hernandez',
       }),
+      findContacts: of([
+        {
+          id: 3,
+          email: 'ru@dy.com',
+          firstName: 'Rudy',
+          lastName: 'Hernandez',
+        }
+      ])
     }
   );
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -40,5 +49,18 @@ describe('ContactSearchComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should show label with \'Search\'', () => {
+    const compiled = fixture.nativeElement;
+    const label = compiled.querySelector('[data-test="searchInput-label"');
+    expect(label).toBeTruthy();
+    expect(label.textContent).toBe('Search');
+  });
+
+  it('should show search input', () => {
+    const compiled = fixture.nativeElement;
+    const searchInput = compiled.querySelector('[data-test="searchInput"');
+    expect(searchInput).toBeTruthy();
   });
 });
