@@ -42,21 +42,21 @@ describe('ContactEditComponent', () => {
 
   it('should show contact-id', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('[data-test="contact-id"')).toBeTruthy();
+    expect(compiled.querySelector('[data-test="contact-id"]')).toBeTruthy();
   });
 
   it('should show first-name', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('[data-test="first-name"')).toBeTruthy();
+    expect(compiled.querySelector('[data-test="first-name"]')).toBeTruthy();
   });
 
   it('should show last-name', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('[data-test="last-name"')).toBeTruthy();
+    expect(compiled.querySelector('[data-test="last-name"]')).toBeTruthy();
   });
 
   it('should show email', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('[data-test="email"')).toBeTruthy();
+    expect(compiled.querySelector('[data-test="email"]')).toBeTruthy();
   });
 });
