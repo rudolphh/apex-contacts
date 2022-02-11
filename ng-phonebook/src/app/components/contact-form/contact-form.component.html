@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div [hidden]="submitted"></div>
   <h1 data-test="add-contact">Add Contact</h1>
-  <form (ngSubmit)="contactForm.valid && onSubmit(contactForm)" #contactForm="ngForm">
+  <form (ngSubmit)="contactForm.valid && onSubmit(contactForm)" #contactForm="ngForm" >
     <div class="form-group">
       <label for="firstName">First Name</label>
       <input type="text" class="form-control" id="firstName"
@@ -30,7 +30,7 @@
     <div class="form-group">
       <label for="email">Email</label>
       <input type="text" class="form-control" id="email"
-             required
+             required 
              [(ngModel)]="model.email" name="email"
              [disabled]="submitted"
              #email="ngModel">
