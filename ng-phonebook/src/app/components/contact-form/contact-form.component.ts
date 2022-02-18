@@ -14,6 +14,8 @@ export class ContactFormComponent implements OnInit {
     submitted = false;
     btnName = 'Submit';
 
+    message = '';
+
     @Output() savedContact = new EventEmitter<Contact>();
 
     constructor(private contactService: ContactService) {
@@ -29,15 +31,21 @@ export class ContactFormComponent implements OnInit {
     onSubmit(contactForm: NgForm): void {
         this.submitted = true;
 
-        this.contactService.postContact(this.model)
-            .subscribe(contact => {
-                console.log('object saved', contact);
-                this.savedContact.emit(contact);
+        // if(!(/^[A-Z]+$/i.test(this.model.firstName))){
+        //   this.message = "Please enter only alpha characters";
+        // } else {
 
-                contactForm.reset();
-                this.model = this.createNew();
-                this.submitted = false;
-            });
+        console.log(this.model)
+        this.contactService.postContact(this.model)
+              .subscribe(contact => {
+                  console.log('object saved', contact);
+                  this.savedContact.emit(contact);
+
+                  contactForm.reset();
+                  this.model = this.createNew();
+                  this.submitted = false;
+              });
+        // }
 
         console.log('submitted');
     }

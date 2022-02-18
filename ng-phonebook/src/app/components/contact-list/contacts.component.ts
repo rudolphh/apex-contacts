@@ -5,6 +5,7 @@ import {Contact} from './contact';
 import { ContactDataService } from '../../services/contact-data.service';
 import { ContactEditComponent } from '../contact-edit/contact-edit.component';
 import {ContactService} from '../../services/contacts.service';
+import { data } from 'src/app/data.json';
 
 @Component({
   selector: 'app-contacts',
@@ -19,6 +20,9 @@ export class ContactsComponent implements OnInit {
     this.contactDataService.contacts$.subscribe(contacts => {
       this.contacts = contacts;
     });
+    // data.push({ id: 3, firstName: 'rudy', lastName: 'hernandez', email: 'rudolpharthur@gmail.com'});
+    // this.contacts = data;
+
   }
 
   ngOnInit(): void {
@@ -43,7 +47,7 @@ export class ContactsComponent implements OnInit {
 
   deleteContact(contact: Contact): void {
     this.contactDataService.deleteContact(contact).subscribe(response => {
-      if(response.success) {
+      if (response.success) {
         this.setContacts(this.contacts.filter(item => item.id !== contact.id));
       }
     });

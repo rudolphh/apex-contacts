@@ -18,11 +18,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let contact of contacts; index as i" (click)="clickRow(contact, i)" style="cursor: pointer;">
-      <th scope="row">{{ contact.id }}</th>
-      <td>{{ contact.firstName }}</td>
-      <td>{{ contact.lastName }}</td>
-      <td>{{ contact.email }}</td>
+    <tr
+      data-test="contact"
+      *ngFor="let contact of contacts; index as i"
+      (click)="clickRow(contact, i)" style="cursor: pointer;">
+      <th data-test="contact-id" scope="row">{{ contact.id }}</th>
+      <td data-test="contact-firstname">{{ contact.firstName }}</td>
+      <td data-test="contact-lastname">{{ contact.lastName }}</td>
+      <td data-test="contact-email">{{ contact.email }}</td>
       <td><button class="btn btn-danger float-right" (click)="deleteContact(contact)">Delete</button></td>
     </tr>
     </tbody>
